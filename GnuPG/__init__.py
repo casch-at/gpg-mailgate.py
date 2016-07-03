@@ -2,7 +2,7 @@ import os
 import subprocess
 
 def public_keys(keyhome):
-  cmd = ['/usr/bin/gpg', '--homedir', keyhome, '--list-keys', '--with-colons']
+  cmd = ['/usr/bin/gpg2', '--homedir', keyhome, '--list-keys', '--with-colons']
   p = subprocess.Popen(cmd, stdin=None, stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE)
   p.wait()
@@ -37,7 +37,7 @@ class GPGEncryptor:
     return encdata
 
   def _command(self):
-    cmd = ["/usr/bin/gpg", "--trust-model", "-a", "-e", "always", "--homedir",
+    cmd = ["/usr/bin/gpg2", "--trust-model", "-a", "-e", "always", "--homedir",
            self._keyhome, "--batch", "--yes", "--pgp7", "--no-secmem-warning"]
 
     # add recipients

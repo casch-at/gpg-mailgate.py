@@ -66,14 +66,14 @@ def encrypt_payload(payload, gpg_to_cmdline):
     filename = payload.get_filename()
 
     if filename:
-      pgpFilename = filename + ".pgp"
+      gpgFilename = filename + ".gpg"
 
       if payload.get('Content-Disposition') is not None:
-        payload.set_param('filename', pgpFilename, 'Content-Disposition')
+        payload.set_param('filename', gpgFilename, 'Content-Disposition')
 
       if payload.get('Content-Type') is not None:
         if payload.get_param('name') is not None:
-          payload.set_param('name', pgpFilename)
+          payload.set_param('name', gpgFilename)
 
   if payload.get('Content-Transfer-Encoding') is not None:
     payload.replace_header('Content-Transfer-Encoding', "7bit")
