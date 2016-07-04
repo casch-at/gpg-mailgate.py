@@ -22,3 +22,4 @@ This is a combined work of many developers:
 * Colin Moller <colin@unixarmy.com> - [GitHub](https://github.com/LeftyBC/gpg-mailgate)
 * Taylor Hornby <havoc@defuse.ca> - [GitHub](https://github.com/defuse/gpg-mailgate)
 * Martin (uragit) <uragit@telemage.com> - [GitHub](https://github.com/uragit/gpg-mailgate)
+* Christian Schwarzgruber <c.schwarzgruber.cs@gmail.com> - [GitHub](https://github.com/cslux/gpg-mailgate.py)
