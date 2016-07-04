@@ -103,6 +103,15 @@ keys = GnuPG.public_keys(cfg['gpg']['keyhome'])
 gpg_to = list()
 ungpg_to = list()
 
+if raw_message.is_multipart():
+  '''
+  If email is a multipart email like multipart/alternative do not encrypt the
+  email as the email cannot not be decrypted anymore.
+  '''
+  log("Not encrypting multipart messages")
+  send_msg(raw_message)
+  exit()
+
 for to in to_addrs:
   if to in keys and not (cfg['default'].has_key('keymap_only') and
                       cfg['default']['keymap_only'] == 'yes'):
@@ -115,6 +124,9 @@ for to in to_addrs:
     ungpg_to.append(to)
 
 if gpg_to == list():
+  '''
+  Setting a header may be usefull for debugging purposes.
+  '''
   if (cfg['default'].has_key('add_header') and
       cfg['default']['add_header'] == 'yes'):
     raw_message['X-GPG-Mailgate'] = 'Not encrypted, public key not found'
