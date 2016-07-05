@@ -57,7 +57,7 @@ def encrypt_payload(payload, gpg_to_cmdline):
   gpg = GnuPG.GPGEncryptor(cfg['gpg']['keyhome'], gpg_to_cmdline,
                            payload.get_content_charset())
   gpg.update(raw_payload)
-  payload.set_payload(gpg.encrypt())
+  payload.set_payload(gpg.encrypt()[0])
 
   isAttachment = (payload.get_param('attachment', None, 'Content-Disposition')
                   is not None)
@@ -153,7 +153,5 @@ for rcpt in gpg_to:
   gpg_to_smtp.append(rcpt[0])
   gpg_to_cmdline.extend(rcpt[1].split(','))
 
-encrypted_payloads = encrypt_all_payloads(raw_message, gpg_to_cmdline)
-raw_message.set_payload(encrypted_payloads)
-
+raw_message.set_payload(encrypt_all_payloads(raw_message, gpg_to_cmdline))
 send_msg(raw_message, gpg_to_smtp)
